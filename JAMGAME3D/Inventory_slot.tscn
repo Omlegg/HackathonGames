@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkpd0j4nkfqhx"]
+
+[ext_resource type="Texture2D" uid="uid://ctiypy86wmafv" path="res://Inventory_slot.png" id="1_btsay"]
+[ext_resource type="Script" path="res://Slot.gd" id="2_pd30i"]
+[ext_resource type="Texture2D" uid="uid://bslh3a5kpoe07" path="res://Lamp_item.png" id="3_ex2la"]
+[ext_resource type="Shader" path="res://Item_Outline.gdshader" id="3_yp5wx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wo0uq"]
+shader = ExtResource("3_yp5wx")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="TextureRect" type="TextureRect"]
+texture_filter = 1
+texture = ExtResource("1_btsay")
+script = ExtResource("2_pd30i")
+
+[node name="lamp" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_wo0uq")
+layout_mode = 0
+offset_left = 34.0
+offset_top = 17.0
+offset_right = 103.0
+offset_bottom = 114.0
+texture = ExtResource("3_ex2la")
+expand_mode = 1

@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://cugk63ykqnjfi"]
+
+[ext_resource type="Texture2D" uid="uid://lpcpqy5p718w" path="res://window.png" id="1_useu0"]
+[ext_resource type="Script" path="res://window.gd" id="2_0v8uv"]
+[ext_resource type="FontFile" uid="uid://c48ygnk46imrd" path="res://REDENSEK.TTF" id="2_bulbs"]
+[ext_resource type="Texture2D" uid="uid://bwd6yb888e8vh" path="res://next_button.png" id="4_6bkjr"]
+[ext_resource type="Texture2D" uid="uid://d3vjkprsi5vuc" path="res://previous_button.png" id="5_dyuvd"]
+[ext_resource type="Texture2D" uid="uid://4s6nsdtjrbil" path="res://select_button.png" id="6_27cn5"]
+[ext_resource type="Texture2D" uid="uid://d1cikvhs7k83c" path="res://X-button.png" id="7_3mu16"]
+[ext_resource type="Texture2D" uid="uid://beueonrrla0df" path="res://X-button_hover.png" id="8_016ki"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j52ga"]
+font = ExtResource("2_bulbs")
+font_size = 12
+outline_size = 2
+outline_color = Color(0.223529, 0.313726, 0.678431, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5ywg"]
+font_size = 10
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="monster_picker" type="NinePatchRect"]
+texture_filter = 1
+anchors_preset = -1
+anchor_right = 0.375
+anchor_bottom = 0.462963
+offset_right = -288.0
+offset_bottom = -200.0
+scale = Vector2(3, 3)
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource("1_useu0")
+patch_margin_left = 1
+patch_margin_top = 10
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("2_0v8uv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -1.66667
+offset_right = 80.0
+offset_bottom = 19.3333
+text = "Monster picker"
+label_settings = SubResource("LabelSettings_j52ga")
+
+[node name="desc" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 14.0
+offset_right = 99.0
+offset_bottom = 93.0
+label_settings = SubResource("LabelSettings_h5ywg")
+
+[node name="next_button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 122.333
+offset_top = 65.3333
+offset_right = 170.333
+offset_bottom = 97.3333
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("4_6bkjr")
+
+[node name="previous_button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 100.667
+offset_top = 65.0
+offset_right = 148.667
+offset_bottom = 97.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("5_dyuvd")
+
+[node name="select_button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 80.3333
+offset_right = 160.0
+offset_bottom = 112.333
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("6_27cn5")
+
+[node name="x_button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 134.667
+offset_top = 1.33333
+offset_right = 150.667
+offset_bottom = 17.3333
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_3mu16")
+texture_hover = ExtResource("8_016ki")
+
+[connection signal="pressed" from="x_button" to="." method="_on_x_button_pressed"]

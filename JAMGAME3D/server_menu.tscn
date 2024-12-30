@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu22eng7ytdd5"]
+
+[ext_resource type="Script" path="res://server_menu.gd" id="1_slyff"]
+[ext_resource type="Script" path="res://Steam.gd" id="2_828ui"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_slyff")
+
+[node name="Steam" type="Node" parent="."]
+script = ExtResource("2_828ui")
+
+[node name="Host" type="Button" parent="."]
+offset_left = 80.0
+offset_top = 334.0
+offset_right = 417.0
+offset_bottom = 423.0
+text = "Host
+"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[node name="LobbyContainer" type="ScrollContainer" parent="."]
+offset_left = 540.0
+offset_top = 124.0
+offset_right = 1063.0
+offset_bottom = 500.0
+
+[node name="Lobbies" type="VBoxContainer" parent="LobbyContainer"]
+layout_mode = 2
+
+[node name="Refresh" type="Button" parent="."]
+offset_left = 81.0
+offset_top = 249.0
+offset_right = 417.0
+offset_bottom = 323.0
+text = "Refresh"
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Refresh" to="." method="_on_refresh_pressed"]

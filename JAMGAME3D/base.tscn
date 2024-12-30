@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://bx3ssuiwfdovd"]
+
+[ext_resource type="PackedScene" uid="uid://lgrwyt81lsfr" path="res://base.dae" id="1_3lr5q"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="2_p8cr5"]
+[ext_resource type="ArrayMesh" uid="uid://bddnxmwixyk55" path="res://computer.obj" id="3_sqnrv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gm38g"]
+render_priority = 0
+shader = ExtResource("2_p8cr5")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8pcb"]
+next_pass = SubResource("ShaderMaterial_gm38g")
+diffuse_mode = 3
+albedo_color = Color(0.164706, 0.188235, 0.231373, 1)
+metallic = 0.49
+metallic_specular = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h6c0"]
+diffuse_mode = 3
+albedo_color = Color(0.384314, 0.705882, 0.647059, 1)
+metallic = 0.15
+metallic_specular = 0.75
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m8kf1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ucexs"]
+render_priority = 0
+shader = ExtResource("2_p8cr5")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4yr1b"]
+next_pass = SubResource("ShaderMaterial_ucexs")
+diffuse_mode = 3
+albedo_color = Color(0.0470588, 0.0627451, 0.117647, 1)
+metallic = 0.15
+metallic_specular = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yubse"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dcf2"]
+next_pass = SubResource("ShaderMaterial_ucexs")
+diffuse_mode = 3
+albedo_color = Color(0.0941176, 0.109804, 0.203922, 1)
+metallic = 0.15
+metallic_specular = 0.75
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pwbsp"]
+size = Vector3(1, 1.22546, 1)
+
+[node name="base" groups=["base"] instance=ExtResource("1_3lr5q")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Circle" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_w8pcb")
+surface_material_override/1 = SubResource("StandardMaterial3D_1h6c0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Circle" index="1"]
+transform = Transform3D(0.843707, 0, 0, 0, 0.843707, 0, 0, 0, 0.843707, 0, 3.14957, 0)
+
+[node name="Area3D" type="Area3D" parent="Circle" index="2"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Circle/Area3D" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.90809, 0)
+shape = SubResource("CylinderShape3D_m8kf1")
+
+[node name="Area3D2" type="Area3D" parent="Circle" index="3"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Circle/Area3D2" index="0"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -2.03117, 0)
+shape = SubResource("CylinderShape3D_m8kf1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Circle" index="4"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.786, 2.576, 0)
+mesh = ExtResource("3_sqnrv")
+surface_material_override/0 = SubResource("StandardMaterial3D_4yr1b")
+surface_material_override/1 = SubResource("StandardMaterial3D_yubse")
+surface_material_override/2 = SubResource("StandardMaterial3D_8dcf2")
+
+[node name="Area3D" type="Area3D" parent="Circle/MeshInstance3D" index="0"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Circle/MeshInstance3D/Area3D" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_pwbsp")

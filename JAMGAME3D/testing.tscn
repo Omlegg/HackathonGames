@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvu7fg415h3wa"]
+
+[ext_resource type="PackedScene" uid="uid://bx3ssuiwfdovd" path="res://base.tscn" id="1_k6ay6"]
+[ext_resource type="PackedScene" uid="uid://cuu43aa256la" path="res://MainGuy.tscn" id="2_xhpvm"]
+[ext_resource type="Texture2D" uid="uid://cbci0072fjwx5" path="res://360_F_421294923_y3psgljkhUKVxpEvC2hJOZ128Fx9eHhS.jpg" id="4_qgtsa"]
+[ext_resource type="PackedScene" uid="uid://csbbyolkyds7s" path="res://canvas_layer.tscn" id="5_a5bnq"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dphw0"]
+panorama = ExtResource("4_qgtsa")
+
+[sub_resource type="Sky" id="Sky_7toqs"]
+sky_material = SubResource("PanoramaSkyMaterial_dphw0")
+
+[sub_resource type="Environment" id="Environment_2ymn6"]
+background_mode = 2
+sky = SubResource("Sky_7toqs")
+tonemap_mode = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("2_xhpvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448514, 0.16743)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2ymn6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.138018, 0.311032, 0.940325, 0.468577, -0.815931, 0.338662, 0.872575, 0.487356, -0.0331293, 7.97437, 27.8036, 26.6675)
+light_color = Color(0.486275, 0.137255, 0.152941, 1)
+light_bake_mode = 1
+shadow_enabled = true
+directional_shadow_blend_splits = true
+directional_shadow_pancake_size = 500.0
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_a5bnq")]
+
+[node name="base" parent="." instance=ExtResource("1_k6ay6")]

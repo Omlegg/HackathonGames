@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckywjai70n1h5"]
+
+[ext_resource type="ArrayMesh" uid="uid://b12snm5r4vd4y" path="res://player.obj" id="1_lb3va"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lkeur"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="other_player" type="CharacterBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = ExtResource("1_lb3va")
+surface_material_override/6 = SubResource("StandardMaterial3D_lkeur")

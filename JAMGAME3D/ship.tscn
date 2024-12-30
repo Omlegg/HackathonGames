@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvapfm3bo0mbd"]
+
+[ext_resource type="PackedScene" uid="uid://lgrwyt81lsfr" path="res://base.dae" id="1_q6nmn"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="2_cw4lr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gm38g"]
+render_priority = 0
+shader = ExtResource("2_cw4lr")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kay4x"]
+next_pass = SubResource("ShaderMaterial_gm38g")
+diffuse_mode = 3
+albedo_color = Color(0.054902, 0.0862745, 0.133333, 1)
+metallic = 0.15
+metallic_specular = 0.75
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kst4"]
+render_priority = 0
+shader = ExtResource("2_cw4lr")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5f5mk"]
+next_pass = SubResource("ShaderMaterial_3kst4")
+diffuse_mode = 3
+albedo_color = Color(0.054902, 0.0862745, 0.133333, 1)
+metallic = 0.15
+metallic_specular = 0.75
+
+[node name="base" instance=ExtResource("1_q6nmn")]
+
+[node name="Circle" parent="." index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_kay4x")
+surface_material_override/0 = SubResource("StandardMaterial3D_5f5mk")

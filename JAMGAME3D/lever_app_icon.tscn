@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dffadgqw6ukme"]
+
+[ext_resource type="Texture2D" uid="uid://5aibjuqs4j6" path="res://Lever_icon.png" id="1_usg8a"]
+[ext_resource type="Script" path="res://Monster_picker_app_icon.gd" id="2_ck6q5"]
+[ext_resource type="FontFile" uid="uid://c48ygnk46imrd" path="res://REDENSEK.TTF" id="3_b1usx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_atksa"]
+font = ExtResource("3_b1usx")
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Monster_picker_app_icon" type="TextureButton"]
+texture_filter = 1
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_usg8a")
+script = ExtResource("2_ck6q5")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 29.0
+offset_right = 35.0
+offset_bottom = 46.0
+text = "Lever"
+label_settings = SubResource("LabelSettings_atksa")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

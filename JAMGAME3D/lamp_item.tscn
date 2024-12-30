@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://1uk7h8l3r0xd"]
+
+[ext_resource type="Script" path="res://lamp.gd" id="1_nswpv"]
+[ext_resource type="ArrayMesh" uid="uid://byev2mwcvr43q" path="res://lamp1.obj" id="2_tlwoj"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="3_8htau"]
+[ext_resource type="Material" uid="uid://78odsuhqa4q8" path="res://Outline.tres" id="4_w05ro"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfsfn"]
+render_priority = 0
+shader = ExtResource("3_8htau")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rgkv"]
+next_pass = SubResource("ShaderMaterial_xfsfn")
+diffuse_mode = 3
+albedo_color = Color(0.113725, 0.12549, 0.152941, 1)
+metallic = 0.1
+metallic_specular = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plsi7"]
+next_pass = SubResource("ShaderMaterial_xfsfn")
+diffuse_mode = 3
+albedo_color = Color(0.721569, 0.666667, 0.52549, 1)
+emission_enabled = true
+emission = Color(0.756863, 0.537255, 0.215686, 1)
+clearcoat_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qvw1x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_246f5"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8ghj3"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="lamp" type="CharacterBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_nswpv")
+item_id = "lamp"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("2_tlwoj")
+surface_material_override/0 = SubResource("StandardMaterial3D_8rgkv")
+surface_material_override/1 = SubResource("StandardMaterial3D_plsi7")
+surface_material_override/2 = ExtResource("4_w05ro")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, -0.001)
+shape = SubResource("BoxShape3D_qvw1x")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.839216, 0.721569, 0.294118, 1)
+omni_range = 9.35143
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.524249, 0)
+shape = SubResource("BoxShape3D_246f5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8ghj3")
